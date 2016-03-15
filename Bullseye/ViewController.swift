@@ -43,8 +43,6 @@ class ViewController: UIViewController {
         
         startNewGame()
         updateLabels()
-        
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,7 +63,6 @@ class ViewController: UIViewController {
             title = "Not even close :-("
         }
         
-        
         let message = "You scored \(points) points!"
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -85,7 +82,18 @@ class ViewController: UIViewController {
     @IBAction func startNewGame() {
         score = 0
         round = 0
+        startNewRound()
+    }
+
+    @IBAction func startOver() {
+        startNewGame()
         updateLabels()
+
+        let transition = CATransition()
+        transition.type = kCATransitionFade
+        transition.duration = 1
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        view.layer.addAnimation(transition, forKey: nil)
     }
     
     func startNewRound() {
@@ -100,7 +108,5 @@ class ViewController: UIViewController {
         scoreLabel.text = String(score)
         roundLabel.text = String(round)
     }
-    
-
 }
 
